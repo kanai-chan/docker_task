@@ -1,0 +1,10 @@
+1)Сначала необходимо создать образ: 
+docker build -t init_image:latest .
+Затем запускаем контейнер на основе этого образа: 
+docker run -d -p 5432:5432 --name docker_task init_image:latest
+2)docker exec -it docker_task psql -U ann task1.3 
+с помощью этой команды можно редактировать данные в уже созданном контейнере
+3)Я создала новый volume специально для этого контейнера:
+docker volume create —-name my_vol
+и добавила команду в докерфайл: VOLUME [ "/my_vol" ]
+Теперь все данные будут сохраняться в этом томе
